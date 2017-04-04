@@ -41,12 +41,12 @@ export type FlashMessageConfig = {
     What needs to happen when the message is clicked. Should
     receive the FlashMessage which is clicked.
   */
-  onClick: OnFlashMessageClicked,
+  onClick?: OnFlashMessageClicked,
   
   /*
     This 'data' object can be used to store any custom data you want to
     associate with the Flash Message. The data 'key' will never
     be used / manipulated now and in the future.
   */
-  data: Object;
+  data?: Object
 };
