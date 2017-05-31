@@ -1,6 +1,6 @@
 {
   "name": "redux-flash-messages",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Storing flash messages and removing them via Redux.",
   "files": [
     "lib"

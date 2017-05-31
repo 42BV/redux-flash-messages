@@ -1,7 +1,7 @@
 // @flow
 
 export { configureFlashMessages, getConfig } from './config.js';
-export { addError, addWarning, addSuccess, addInfo } from './service.js';
+export { addError, addWarning, addSuccess, addInfo, addApocalypse, addFlashMessageOfType } from './service.js';
 export { flashMessage, addFlashMessage, removeFlashMessage } from './flash-message-reducer.js';
 
 export type { FlashMessageStore } from './flash-message-reducer.js';
