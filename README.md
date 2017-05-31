@@ -1,5 +1,8 @@
 # About
 
+[![Build Status](https://travis-ci.org/42BV/redux-flash-messages.svg?branch=master)](https://travis-ci.org/42BV/redux-flash-messages)
+[![Codecov](https://codecov.io/gh/42BV/redux-flash-messages/branch/master/graph/badge.svg)](https://codecov.io/gh/42BV/redux-flash-messages)
+
 This library makes it easy to create flash messages and to store them in a Redux store. 
 
 What makes this project a little different from most flash message libraries is that it is UI agnostic. This library does not render the FlashMessages for you it only stores them!
