@@ -1,7 +1,7 @@
 // @flow
 
 import { getConfig, addFlashMessage, removeFlashMessage } from './index';
-import type { FlashMessageConfig, OnFlashMessageClicked } from './models';
+import type { FlashMessageConfig, OnFlashMessageClicked, FlashMessage } from './models';
 
 /**
  * Adds a flash message of the type 'ERROR' on the flash message queue
@@ -73,14 +73,9 @@ export function addFlashMessageOfType(type: string, duration: number | false, te
 
   const id = nextFlashMessageId;
 
-  dispatch(addFlashMessage({
-    id,
-    type,
-    duration,
-    text,
-    onClick,
-    data
-  }));
+  const flashMessage: FlashMessage = { id, type, duration, text, onClick, data };
+
+  dispatch(addFlashMessage(flashMessage));
 
   if (duration !== false) {
     setTimeout(() => {

@@ -1,8 +1,10 @@
 // @flow
 
+import type { Action } from './flash-message-reducer';
+
 export type Config = {
   // The dispatch function for the Redux store.
-  dispatch: () => void,
+  dispatch: (action: Action) => void,
 };
 
 let config: Config | null = null;

@@ -2,16 +2,12 @@
 
 import type { FlashMessage } from './models';
 
-type Action = {
-  type: string,
-  payload: any
-};
-
-export const ADD_FLASH_MESSAGE = 'ADD_FLASH_MESSAGE';
-export const REMOVE_FLASH_MESSAGE = 'REMOVE_MESSAGE';
+export type Action = 
+  | { type: 'REDUX_FLASH_MESSAGE.ADD_FLASH_MESSAGE', flashMessage: FlashMessage }
+  | { type: 'REDUX_FLASH_MESSAGE.REMOVE_FLASH_MESSAGE', flashMessageId: number };
 
 export type FlashMessageStore = {
-  messages: Array<FlashMessage>
+  +messages: Array<FlashMessage>
 };
 
 export const initialState: FlashMessageStore = {
@@ -20,13 +16,13 @@ export const initialState: FlashMessageStore = {
 
 export function flashMessage(state: FlashMessageStore = initialState, action: Action): FlashMessageStore {
   switch(action.type) {
-    case ADD_FLASH_MESSAGE: {
-      const messages = [...state.messages, action.payload.flashMessage];
+    case 'REDUX_FLASH_MESSAGE.ADD_FLASH_MESSAGE': {
+      const messages = [...state.messages, action.flashMessage];
       return { ...state, messages};
     }
 
-    case REMOVE_FLASH_MESSAGE: {
-      const flashMessageId = action.payload.flashMessageId;
+    case 'REDUX_FLASH_MESSAGE.REMOVE_FLASH_MESSAGE': {
+      const flashMessageId = action.flashMessageId;
 
       const messages = state.messages.filter((f) => flashMessageId !== f.id);
       return { ...state, messages };
@@ -39,9 +35,9 @@ export function flashMessage(state: FlashMessageStore = initialState, action: Ac
 }
 
 export function addFlashMessage(flashMessage: FlashMessage): Action {
-  return { type: ADD_FLASH_MESSAGE, payload: { flashMessage } };
+  return { type: 'REDUX_FLASH_MESSAGE.ADD_FLASH_MESSAGE', flashMessage };
 }
 
 export function removeFlashMessage(flashMessageId: number): Action {
-  return { type: REMOVE_FLASH_MESSAGE, payload: { flashMessageId } };
+  return { type: 'REDUX_FLASH_MESSAGE.REMOVE_FLASH_MESSAGE', flashMessageId };
 }
