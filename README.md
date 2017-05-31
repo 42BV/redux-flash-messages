@@ -22,7 +22,7 @@ First install the following dependencies in the package.json:
 
 Now add the flash-message-reducer to your rootReducer for example:
 
-```JavaScript
+```js
 // @flow
 
 import { combineReducers } from 'redux';
@@ -48,7 +48,7 @@ the flash messages.
 
 Next you have to configure the flashMessages module:
 
-```JavaScript
+```js
 import { createStore } from 'redux';
 import { configureFlashMessages } from 'redux-flash-messages';
 
@@ -68,7 +68,7 @@ The redux-flash-messages module must be configured before the application is ren
 
 Next we need to render the flash messages from the Redux store. How you do this is entirely up to you, but here is a small example:
 
-```JavaScript
+```js
 // @flow
 
 import React, { Component } from 'react';
@@ -140,7 +140,7 @@ export default connect((store: Store) => {
 
 Where the contents of 'FlashMessage.css' is:
 
-```CSS
+```css
 .flash-message {
   position: absolute;
   width: 100%;
@@ -155,10 +155,10 @@ Where the contents of 'FlashMessage.css' is:
 
 # Sending flash messages
 
-Now that we can see the flash messages we can use the following convenience  methods to send flash messages:
+Now that we can see the flash messages we can use the following convenience methods to send flash messages:
 
-```JavaScript
-import { addError, addWarning, addSuccess, addInfo, addApocalypse } from '../src/service';
+```js
+import { addError, addWarning, addSuccess, addInfo, addApocalypse } from 'redux-flash-messages';
 
 // Renders a message for 10000 milliseconds
 addError({ text: 'Epic error', data: { age: 12 }, onClick: (flashMessage) => {
@@ -201,8 +201,8 @@ If the default types are not enough you can always create your own flash message
 
 You do this by calling `addFlashMessageOfType` manually.
 
-```JavaScript
-import { addFlashMessageOfType } from '../src/service';
+```js
+import { addFlashMessageOfType } from 'redux-flash-messages';
 
 export function addNotice({ text, onClick, data }: FlashMessageConfig) {
   addFlashMessageOfType('NOTICE', 1000, text, onClick, data);
