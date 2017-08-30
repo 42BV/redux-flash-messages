@@ -26,10 +26,9 @@ Now add the flash-message-reducer to your rootReducer for example:
 // @flow
 
 import { combineReducers } from 'redux';
-import { reducer as formReducer } from 'redux-form';
 
-import type { FlashMessageStore } from '../jarb-redux-form';
-import { flashMessage } from '../jarb-redux-form';
+import type { FlashMessageStore } from 'redux-flash-messages';
+import { flashMessage } from 'redux-flash-messages';
 
 export type Store = {
   flashMessage: FlashMessageStore
