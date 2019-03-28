@@ -1,11 +1,9 @@
-// @flow
+import { FlashMessageActions } from './models';
 
-import type { Action } from './flash-message-reducer';
-
-export type Config = {
+export interface Config {
   // The dispatch function for the Redux store.
-  dispatch: (action: Action) => void,
-};
+  dispatch: (action: FlashMessageActions) => void;
+}
 
 let config: Config | null = null;
 
@@ -14,7 +12,7 @@ let config: Config | null = null;
  *
  * @param {Config} The new configuration
  */
-export function configureFlashMessages(c: Config) {
+export function configureFlashMessages(c: Config): void {
   config = c;
 }
 

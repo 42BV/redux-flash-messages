@@ -1,14 +1,15 @@
-
 import { createStore } from 'redux';
 
 import { flashMessage, initialState, addFlashMessage, removeFlashMessage } from '../src/flash-message-reducer';
+import { MessageTypes } from '../src/models';
 
 describe('Store: FlashMessageStore', () => {
   test('initial state', () => {
+    // @ts-ignore
     const flashMessageStore = flashMessage(undefined, { type: 'FAKE_ACTION' });
 
     const expected = {
-      messages: []
+      messages: [],
     };
 
     expect(flashMessageStore).toEqual(expected);
@@ -23,11 +24,11 @@ describe('Store: FlashMessageStore', () => {
     // Second we configure a Flash Message
     const flashMessageOne = {
       id: 1,
-      type: 'info',
-      text: `Added the stuff successfully`,
+      type: MessageTypes.Info,
+      text: 'Added the stuff successfully',
       duration: 1000,
       onClick: onClickSpy,
-      data: { age: 12 }
+      data: { age: 12 },
     };
 
     // Now we add the message to the store.
@@ -36,23 +37,25 @@ describe('Store: FlashMessageStore', () => {
     let state = store.getState();
 
     // We expect our message to be in the store with the id 1.
-    expect(state.messages).toEqual([{
-      id: 1,
-      type: 'info',
-      text: `Added the stuff successfully`,
-      duration: 1000,
-      onClick: onClickSpy,
-      data: { age: 12 }
-    }]);
+    expect(state.messages).toEqual([
+      {
+        id: 1,
+        type: MessageTypes.Info,
+        text: 'Added the stuff successfully',
+        duration: 1000,
+        onClick: onClickSpy,
+        data: { age: 12 },
+      },
+    ]);
 
     // Now we add the same flash message again.
     const flashMessageTwo = {
       id: 2,
-      type: 'error',
-      text: `Epic failure`,
+      type: MessageTypes.Error,
+      text: 'Epic failure',
       duration: 3000,
       onClick: onClickSpy,
-      data: { age: 15 }
+      data: { age: 15 },
     };
 
     store.dispatch(addFlashMessage(flashMessageTwo));
@@ -60,21 +63,24 @@ describe('Store: FlashMessageStore', () => {
     state = store.getState();
 
     // The message should be added with the id of 2.
-    expect(state.messages).toEqual([{
-      id: 1,
-      type: 'info',
-      text: `Added the stuff successfully`,
-      duration: 1000,
-      onClick: onClickSpy,
-      data: { age: 12 }
-    }, {
-      id: 2,
-      type: 'error',
-      text: `Epic failure`,
-      duration: 3000,
-      onClick: onClickSpy,
-      data: { age: 15 }
-    }]);
+    expect(state.messages).toEqual([
+      {
+        id: 1,
+        type: MessageTypes.Info,
+        text: 'Added the stuff successfully',
+        duration: 1000,
+        onClick: onClickSpy,
+        data: { age: 12 },
+      },
+      {
+        id: 2,
+        type: MessageTypes.Error,
+        text: 'Epic failure',
+        duration: 3000,
+        onClick: onClickSpy,
+        data: { age: 15 },
+      },
+    ]);
 
     // Now lets remove the first message
     store.dispatch(removeFlashMessage(1));
@@ -82,13 +88,15 @@ describe('Store: FlashMessageStore', () => {
     state = store.getState();
 
     // The first message should be removed
-    expect(state.messages).toEqual([{
-      id: 2,
-      type: 'error',
-      text: `Epic failure`,
-      duration: 3000,
-      onClick: onClickSpy,
-      data: { age: 15 }
-    }]);
+    expect(state.messages).toEqual([
+      {
+        id: 2,
+        type: MessageTypes.Error,
+        text: 'Epic failure',
+        duration: 3000,
+        onClick: onClickSpy,
+        data: { age: 15 },
+      },
+    ]);
   });
 });
