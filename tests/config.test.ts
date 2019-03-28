@@ -1,4 +1,3 @@
-
 import { configureFlashMessages, getConfig } from '../src/config';
 
 test('configuration lifecycle', () => {
@@ -7,9 +6,10 @@ test('configuration lifecycle', () => {
 
   // Next we initialize the config.
   const config = {
-    dispath: jest.fn
+    dispath: jest.fn,
   };
 
+  // @ts-ignore
   configureFlashMessages(config);
 
   // Now we expect the config to be set.

@@ -23,16 +23,13 @@ First install the following dependencies in the package.json:
 Now add the flash-message-reducer to your rootReducer for example:
 
 ```js
-// @flow
-
 import { combineReducers } from 'redux';
 
-import type { FlashMessageStore } from 'redux-flash-messages';
-import { flashMessage } from 'redux-flash-messages';
+import { flashMessage, FlashMessageStore } from 'redux-flash-messages';
 
-export type Store = {
-  flashMessage: FlashMessageStore
-};
+export interface Store {
+  flashMessage: FlashMessageStore;
+}
 
 // Use ES6 object literal shorthand syntax to define the object shape
 const rootReducer = combineReducers({
@@ -68,25 +65,20 @@ The redux-flash-messages module must be configured before the application is ren
 Next we need to render the flash messages from the Redux store. How you do this is entirely up to you, but here is a small example:
 
 ```js
-// @flow
-
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Store, Dispatch } from 'redux';
 
-import type { Store } from '../../../redux/root-reducer';
-import type { Dispatch } from '../../../redux/models';
-
-import type { FlashMessage as FlashMessageShape } from 'redux-flash-messages';
-import { removeFlashMessage } from 'redux-flash-messages';
+import { removeFlashMessage, FlashMessage as FlashMessageShape } from 'redux-flash-messages';
 
 import './FlashMessage.css';
 
-type Props = {
-  messages: Array<FlashMessageShape>,
-  dispatch: Dispatch
-};
+interface Props {
+  messages: Array<FlashMessageShape>;
+  dispatch: Dispatch;
+}
 
-export class FlashMessage extends Component<void, Props, void> {
+export class FlashMessage extends Component<Props, {}> {
 
   onFlashMessageClick(flashMessage: FlashMessageShape) {
     /* 
@@ -203,7 +195,11 @@ You do this by calling `addFlashMessageOfType` manually.
 ```js
 import { addFlashMessageOfType } from 'redux-flash-messages';
 
+enum CustomTypes {
+  Notice = 'NOTICE',
+}
+
 export function addNotice({ text, onClick, data }: FlashMessageConfig) {
-  addFlashMessageOfType('NOTICE', 1000, text, onClick, data);
+  addFlashMessageOfType(CustomTypes.Notice, 1000, text, onClick, data);
 }
 ```
